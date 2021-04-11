@@ -6,27 +6,49 @@ export default class App extends Component {
   constructor () {
     super();
     this.state = {
-      word: 0,
+      word: '',
       consonants: 0,
       vowel: 0,
       characters: 0,
-      analyze: 0
+      splits: ''
     }
   }
+
+  analyze() {
+    this.state.vowel=0;
+    this.state.consonants=0;
+    const splits=this.state.word.split('');
+    for (let i =0; i< splits.length; i++) {
+      if (splits[i]=='A'||splits[i]=='E'||splits[i]=='I'||splits[i]=='O'||splits[i]=='U'||
+          splits[i]=='a'||splits[i]=='e'||splits[i]=='i'||splits[i]=='o'||splits[i]=='u')
+      {
+        this.state.consonants+=1;
+      }
+      else{
+        this.state.vowel+=1;
+      }
+    }
+    this.state.splits=splits.join('');
+    this.setState({ word: ''})
+  };
+
     render() {
       return (
         <View style={styles.container}>
+
           <Text>A WORD ANALYZER</Text>
           <br></br>
           <Text>Word: <TextInput onChangeText={(word) =>
             this.setState({word})}
             placeholder='type here'/></Text>
             <br></br>
+
           <Button color="#841584"
             onPress={this.analyzeWord}
             title='Analyze'/>
             <br></br>
-          <Text>Word: {this.state.word}</Text>
+
+          <Text>Word: {this.state.splits}</Text>
           <Text>No of Consonants: {this.state.consonants}</Text>
           <Text>No of Vowels: {this.state.vowel}</Text>
           <Text>No of Characters: {this.state.characters}</Text>
