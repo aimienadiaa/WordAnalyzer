@@ -10,14 +10,16 @@ export default class App extends Component {
       consonants: 0,
       vowel: 0,
       characters: 0,
-      splits: ''
+      splits: []
     }
   }
 
   analyze() {
     this.state.vowel=0;
     this.state.consonants=0;
+    this.state.characters=0;
     const splits=this.state.word.split('');
+
     for (let i =0; i< splits.length; i++) {
       if (splits[i]=='A'||splits[i]=='E'||splits[i]=='I'||splits[i]=='O'||splits[i]=='U'||
           splits[i]=='a'||splits[i]=='e'||splits[i]=='i'||splits[i]=='o'||splits[i]=='u')
@@ -36,7 +38,7 @@ export default class App extends Component {
       return (
         <View style={styles.container}>
 
-          <Text>A WORD ANALYZER</Text>
+          <Text style={styles.header}>A WORD ANALYZER</Text>
           <br></br>
           <Text>Word: <TextInput onChangeText={(word) =>
             this.setState({word})}
